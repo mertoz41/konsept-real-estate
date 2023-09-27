@@ -6,15 +6,13 @@ import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const router = useRouter();
+  useEffect(() => {
+    let realToken = localStorage.getItem("jwt");
+    if (!realToken) {
+      router.push("/giris");
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   let token = localStorage.getItem("jwt");
-  //   if (!token) {
-  //     router.push("/giris");
-  //   }
-  // }, []);
-  // THIS PAGE IS TO BE PROTECTED BY USER TOKEN
-  // IF TOKEN IS NOT PRESENT, USER MUST BE NAVIGATED BACK TO LOGIN PAGE
   return (
     <Grid
       h="100vh"

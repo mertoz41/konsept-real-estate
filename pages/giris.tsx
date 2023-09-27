@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Box, Text, Input, Heading, Flex, Button } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -10,7 +10,12 @@ type Inputs = {
 const Login = () => {
   const router = useRouter();
   const { updateToken } = useContext(AuthContext);
-
+  useEffect(() => {
+    let token = localStorage.getItem("jwt");
+    if (token) {
+      router.push("/admin");
+    }
+  }, []);
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     setIsLoading(true);
